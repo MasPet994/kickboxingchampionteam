@@ -10,6 +10,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Mobile Menu Toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const mainNav = document.querySelector('.main-nav');
+    const navLinks = document.querySelectorAll('.main-nav a');
+
+    if (navToggle) {
+        navToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            document.body.classList.toggle('nav-open');
+        });
+    }
+
+    // Close menu when clicking a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mainNav.classList.remove('active');
+            document.body.classList.remove('nav-open');
+        });
+    });
+
+
     // 3D Mouse Tracking Glow Effect on Cards
     const cards = document.querySelectorAll('.card');
 

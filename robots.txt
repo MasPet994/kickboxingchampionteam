@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kickboxing-championteam.web.app/sitemap.xml

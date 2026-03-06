@@ -30,13 +30,25 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 1.5rem 5%;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1.5rem 5%;
     background: transparent;
-    transition: background 0.3s ease, padding 0.3s ease;
-    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.main-header.scrolled .header-container {
+    background: var(--nav-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 1rem 5%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .main-header.scrolled {
@@ -619,15 +631,110 @@ footer {
     transform: translateY(0);
 }
 
+/* Mobile Menu Toggle */
+.nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 1rem;
+    z-index: 2000;
+}
+
+.hamburger {
+    display: block;
+    position: relative;
+    width: 24px;
+    height: 2px;
+    background: var(--gold);
+    transition: transform 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background: var(--gold);
+    transition: transform 0.3s ease;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    bottom: -8px;
+}
+
+/* Mobile Menu Open State */
+.nav-open .hamburger {
+    transform: rotate(45deg);
+}
+
+.nav-open .hamburger::before {
+    transform: rotate(90deg) translate(8px, 0);
+}
+
+.nav-open .hamburger::after {
+    transform: rotate(90deg) translate(-8px, 0);
+}
+
+.nav-open .hamburger {
+    background: transparent;
+}
+
+.mobile-only {
+    display: none;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
-    .main-nav ul {
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-actions {
         display: none;
-        /* In a real app, add a hamburger menu */
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background: rgba(13, 13, 13, 0.98);
+        backdrop-filter: blur(20px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 1500;
+    }
+
+    .main-nav.active {
+        right: 0;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .main-nav ul li a {
+        font-size: 1.5rem;
+    }
+
+    .mobile-only {
+        display: block;
     }
 
     .hero-title {
-        font-size: 2.8rem;
+        font-size: 2.5rem;
     }
 
     .hero-subtitle {
