@@ -140,7 +140,14 @@ body {
     align-items: center;
     text-align: center;
     overflow: hidden;
+    min-height: 100vh;
+    /* Ensure it takes at least full viewport height, but can grow if needed */
+    height: auto;
+    padding-top: 100px;
+    padding-bottom: 4rem;
+    /* Assicura spazio sotto il bottone nella hero */
 }
+
 
 /* Static Image Background */
 .bg-image {
@@ -281,10 +288,13 @@ body {
 
 /* Sections */
 main>section:not(.hero) {
-    padding: 8rem 2rem;
+    padding: 6rem 2rem;
     position: relative;
     z-index: 2;
+    margin-top: 5rem;
+    /* Maggior margine per distanziare la sezione successiva */
 }
+
 
 .section-title {
     text-align: center;
@@ -457,37 +467,77 @@ main>section:not(.hero) {
     color: var(--text-muted);
 }
 
-.sponsors-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
+/* Sponsors Section */
+.sponsors-section {
+    padding: 6rem 5%;
+    background: #050505;
+    text-align: center;
 }
 
-.sponsors-grid {
+.sponsors-subtitle {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sponsors-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 2rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+.sponsors-slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    /* Soft fade masks on left and right for seamless entry/exit */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.sponsors-track {
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    width: calc(150px * 12 + 4rem * 12);
+    /* Estimate width based on logos + gap */
     gap: 4rem;
-    padding: 2rem;
-    background: var(--card-bg);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 30px;
+    animation: scroll 30s linear infinite;
+}
+
+.sponsors-slider:hover .sponsors-track {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-150px * 6 - 4rem * 6));
+        /* Scroll exactly half the track width */
+    }
 }
 
 .sponsor-logo {
     max-width: 150px;
     height: auto;
-    filter: brightness(0) invert(1) opacity(0.6);
+    filter: brightness(0) invert(1) opacity(0.5);
+    /* Dimmer by default */
     transition: all 0.4s ease;
+    cursor: pointer;
 }
 
 .sponsor-logo:hover {
-    filter: brightness(0) invert(1) opacity(1);
+    /* Glowing golden effect on hover */
+    filter: brightness(0) invert(1) opacity(1) drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
     transform: scale(1.1);
 }
 
